@@ -1,7 +1,7 @@
 # from app import response
 from langchain_ollama import ChatOllama
 from langchain_core.messages import HumanMessage, SystemMessage
-from retreive import retreiver
+from Rretreive import retreiver
 
 def generate_answer(user_query:str,retrieved_docs:list) -> str:
     """
