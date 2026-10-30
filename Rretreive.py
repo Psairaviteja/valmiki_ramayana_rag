@@ -1,21 +1,25 @@
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
 
-# 1. Load the embedding model and the saved Chroma database
+DB_PATH = "./chroma_lc_db"
+COLLECTION = "valmiki_ramayana"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
 
 def retreiver(user_query):
-    persist_directory = "./chroma_lc_db"
-    embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embedding_model = HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL)
 
     vector_db = Chroma(
-        persist_directory=persist_directory,
-        embedding_function=embedding_model
+        collection_name=COLLECTION,
+        persist_directory=DB_PATH,
+        embedding_function=embedding_model,
     )
 
-    # 3. Perform similarity search to retrieve relevant Ramayana chunks
+    # Retrieve the top 10 most similar Ramayana chunks.
     retrieved_docs = vector_db.similarity_search(user_query, k=10)
 
     return retrieved_docs
+
 
 if __name__ == "__main__":
     user_query = "Who is Ravana"
@@ -25,4 +29,4 @@ if __name__ == "__main__":
     print(retrieved_docs)
     print("--- Retrieved Ramayana Context ---")
     context = "\n".join([doc.page_content for doc in retrieved_docs])
-    print("Context:" ,context )
+    print("Context:", context)
