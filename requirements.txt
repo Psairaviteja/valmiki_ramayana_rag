@@ -5,3 +5,10 @@ sentence-transformers>=3.4.1
 streamlit>=1.42.0
 ollama>=0.4.7
 python-dotenv>=1.0.1
+
+# LangChain integrations used by ingestion, retrieval, and generation
+langchain-core
+langchain-chroma
+langchain-huggingface
+langchain-text-splitters
+langchain-ollama
