@@ -4,7 +4,7 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 # 1. Load the embedding model and the saved Chroma database
 
 def retreiver(user_query):
-    persist_directory = "./ramayana_db"
+    persist_directory = "./chroma_lc_db"
     embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
     vector_db = Chroma(
